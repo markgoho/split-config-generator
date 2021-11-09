@@ -1,5 +1,5 @@
-import { getGroupRuntime } from '..';
 import { FileWithRuntime } from '../models';
+import { getGroupRuntime } from '../util/getGroupRuntime';
 
 /**
  * Reads file array and returns details about the

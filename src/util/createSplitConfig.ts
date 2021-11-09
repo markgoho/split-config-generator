@@ -1,8 +1,8 @@
-import { FilesWithRuntime, FileWithRuntime, SplitConfig } from '../models';
+import { FilesWithRuntime, FileWithRuntime, FileGroup } from '../models';
 
-export const createSplitConfigFromGroups = (
+export const createFileGroups = (
   groupRunTimes: FilesWithRuntime[],
-): SplitConfig => {
+): FileGroup[] => {
   return groupRunTimes.map((group) => {
     return {
       files: group.files.map((file) => (file as FileWithRuntime).filePath),

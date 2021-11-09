@@ -1,13 +1,8 @@
-import { getGroupRuntime } from '../src';
-import {
-  fileWithRuntime1,
-  fileWithRuntime2,
-  fileWithRuntime3,
-} from './mocks';
+import { getGroupRuntime } from '../src/util';
+import { fileWithRuntime1, fileWithRuntime2, fileWithRuntime3 } from './mocks';
 
 describe('Group Runtime', () => {
   it('Should calculate the runtime of a group', () => {
-
     expect(getGroupRuntime(fileWithRuntime1)).toBe(70);
   });
 

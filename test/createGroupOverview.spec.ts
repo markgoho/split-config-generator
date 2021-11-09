@@ -1,4 +1,4 @@
-import { createGroupOverview } from '../src';
+import { createGroupOverview } from '../src/create-group-overview';
 import { fileGroups } from './mocks';
 
 describe('Group Overview', () => {

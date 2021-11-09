@@ -1,4 +1,4 @@
-import { runtimeDetails } from '../src';
+import { runtimeDetails } from '../src/runtime-details';
 import { fileWithRuntime1, fileWithRuntime2, fileWithRuntime3 } from './mocks';
 
 describe('Runtime Details', () => {
