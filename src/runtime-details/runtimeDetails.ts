@@ -6,7 +6,7 @@ import { getGroupRuntime } from '../util/getGroupRuntime';
  * nature of the set of files
  * @param files an array of files with runtime
  */
-export function runtimeDetails(files: FileWithRuntime[]) {
+export const runtimeDetails = (files: FileWithRuntime[]) => {
   const [longestTest] = files.sort((a, b) => (a.runtime > b.runtime ? -1 : 1));
   const totalRuntime = getGroupRuntime(files);
 
@@ -18,4 +18,4 @@ export function runtimeDetails(files: FileWithRuntime[]) {
     totalRuntime,
     suggestedGroupCount,
   };
-}
+};

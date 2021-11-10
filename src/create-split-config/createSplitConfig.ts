@@ -1,11 +1,18 @@
-import { FilesWithRuntime, FileWithRuntime, SplitConfig } from '../models';
+import {
+  FileGroup,
+  FilesWithRuntime,
+  FileWithRuntime,
+  SplitConfig,
+} from '../models';
 import { runtimeDetails } from '../runtime-details';
 import { createFileGroups, getGroupRuntime } from '../util';
 
 export const createSplitConfig = (
-  files: FileWithRuntime[],
+  filesWithRuntime: FileWithRuntime[],
   groupCount?: number,
-): SplitConfig => {
+): FileGroup[] => {
+  const files = [...filesWithRuntime];
+
   const { longestTest, totalRuntime, suggestedGroupCount } =
     runtimeDetails(files);
 

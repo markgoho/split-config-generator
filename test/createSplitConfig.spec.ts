@@ -1,43 +1,54 @@
-import { createSplitConfig, FileGroup, FileWithRuntime } from '../src';
+import { createSplitConfig, FileGroup } from '../src';
+import {
+  fileWithRuntime1,
+  fileWithRuntime2,
+  fileWithRuntime3,
+  realWorldExample,
+  veryContrivedExample,
+} from './mocks';
 
 describe('Create Split Config', () => {
-  it('Should create a split config from a list of files with runtimes', () => {
-    const files: FileWithRuntime[] = [
-      {
-        filePath: 'file1.ts',
-        runtime: 35435353,
-      },
-      {
-        filePath: 'file2.ts',
-        runtime: 46545435,
-      },
-      {
-        filePath: 'file3.ts',
-        runtime: 54654365,
-      },
-      {
-        filePath: 'file4.ts',
-        runtime: 65465465,
-      },
+  const contrivedExample = [...veryContrivedExample];
+
+  it('Should create a split config with just one group', () => {
+    const report = [
+      ...fileWithRuntime1,
+      ...fileWithRuntime2,
+      ...fileWithRuntime3,
     ];
 
-    const splitConfig: FileGroup[] = createSplitConfig(files);
+    const splitConfig: FileGroup[] = createSplitConfig(report);
 
-    expect(splitConfig.length).toBe(4);
+    expect(splitConfig.length).toBe(8);
+  });
 
-    expect(splitConfig).toStrictEqual([
-      {
-        files: ['file4.ts'],
-      },
-      {
-        files: ['file3.ts'],
-      },
-      {
-        files: ['file2.ts'],
-      },
-      {
-        files: ['file1.ts'],
-      },
-    ]);
+  it('Should create a split config with manual group override', () => {
+    const report = [
+      ...fileWithRuntime1,
+      ...fileWithRuntime2,
+      ...fileWithRuntime3,
+    ];
+
+    const splitConfig: FileGroup[] = createSplitConfig(report, 5);
+
+    expect(splitConfig.length).toBe(5);
+  });
+
+  it('Should create a split config with a very simple example', () => {
+    const splitConfig: FileGroup[] = createSplitConfig(contrivedExample);
+
+    expect(splitConfig.length).toBe(3);
+  });
+
+  it('Should create a split config with a very simple example', () => {
+    const splitConfig: FileGroup[] = createSplitConfig(contrivedExample, 2);
+
+    expect(splitConfig.length).toBe(2);
+  });
+
+  it('Should create a split config with a real world example', () => {
+    const splitConfig: FileGroup[] = createSplitConfig(realWorldExample);
+
+    expect(splitConfig.length).toBe(5);
   });
 });
