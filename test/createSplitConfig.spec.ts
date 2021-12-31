@@ -10,7 +10,7 @@ import {
 describe('Create Split Config', () => {
   const contrivedExample = [...veryContrivedExample];
 
-  it('Should create a split config with just one group', () => {
+  it('Should create a split config with just 8 groups', () => {
     const report = [
       ...fileWithRuntime1,
       ...fileWithRuntime2,
@@ -48,6 +48,20 @@ describe('Create Split Config', () => {
 
   it('Should create a split config with a real world example', () => {
     const splitConfig: FileGroup[] = createSplitConfig(realWorldExample);
+
+    expect(splitConfig.length).toBe(5);
+  });
+
+  it('Should create a split config with a real world example with manual group count', () => {
+    const splitConfig: FileGroup[] = createSplitConfig(realWorldExample, 4);
+
+    expect(splitConfig.length).toBe(4);
+  });
+
+  it('Should create a split config with a manual group count that is higher than what it should be', () => {
+    // Here the suggested group count is 5, but the manual group count is 15
+    // The suggested group count will be used instead
+    const splitConfig: FileGroup[] = createSplitConfig(realWorldExample, 15);
 
     expect(splitConfig.length).toBe(5);
   });

@@ -9,14 +9,25 @@ import { createFileGroups, getGroupRuntime } from '../util';
 
 export const createSplitConfig = (
   filesWithRuntime: FileWithRuntime[],
-  groupCount?: number,
+  manualGroupCount?: number,
 ): FileGroup[] => {
   const files = [...filesWithRuntime];
 
   const { longestTest, totalRuntime, suggestedGroupCount } =
     runtimeDetails(files);
 
-  const expectedGroupCount = groupCount ?? suggestedGroupCount;
+  let expectedGroupCount;
+
+  if (
+    manualGroupCount !== undefined &&
+    manualGroupCount <= suggestedGroupCount
+  ) {
+    expectedGroupCount = manualGroupCount;
+  } else {
+    expectedGroupCount = suggestedGroupCount;
+  }
+
+  // console.log({ manualGroupCount, suggestedGroupCount, expectedGroupCount });
 
   const groupRuntimes: FilesWithRuntime[] = Array.from(
     { length: expectedGroupCount },
@@ -29,26 +40,27 @@ export const createSplitConfig = (
   // 1. The longest test if the suggested group count is used
   // 2. The total runtime of all the tests divided by the manual group count
   let maxGroupRuntime: number;
-  if (groupCount === undefined) {
+  if (manualGroupCount === undefined) {
     maxGroupRuntime = longestTest;
   } else {
     maxGroupRuntime = totalRuntime / expectedGroupCount;
   }
 
+  // console.log({ maxGroupRuntime, longestTest });
+
   if (maxGroupRuntime < longestTest) {
-    console.error(`The max group runtime is less than the longest test.`);
-    console.error(`Decrease group count or run without a second argument.`);
+    console.info(`The max group runtime is less than the longest test.`);
   }
 
   // The magic happens here
   groupRuntimes.forEach(async (group: FilesWithRuntime) => {
-    while (getGroupRuntime(group.files) < longestTest && files.length) {
+    while (getGroupRuntime(group.files) < maxGroupRuntime && files.length) {
       // start with file at front of array
       const largestFile = files[0];
 
       // test whether that file can be added to current group
       const largestFileIsAddable =
-        largestFile.runtime + getGroupRuntime(group.files) <= longestTest;
+        largestFile.runtime + getGroupRuntime(group.files) <= maxGroupRuntime;
 
       // if that file can be added, add it
       if (largestFileIsAddable) {
@@ -63,7 +75,7 @@ export const createSplitConfig = (
       const smallestFile: FileWithRuntime = files[files.length - 1];
 
       const smallestFileIsAddable =
-        smallestFile.runtime + getGroupRuntime(group.files) <= longestTest;
+        smallestFile.runtime + getGroupRuntime(group.files) <= maxGroupRuntime;
 
       if (smallestFileIsAddable) {
         const file = files.pop();
