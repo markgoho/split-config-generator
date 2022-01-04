@@ -1,6 +1,6 @@
 {
   "name": "split-config-generator",
-  "version": "1.3.0",
+  "version": "1.3.1",
   "description": "Generate split configs for use with test-boosters",
   "main": "./dist/index.js",
   "scripts": {
