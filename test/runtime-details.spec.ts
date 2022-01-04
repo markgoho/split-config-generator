@@ -31,10 +31,10 @@ describe('Runtime Details', () => {
     const { longestTest, longestTestName, suggestedGroupCount, totalRuntime } =
       runtimeDetails(fileWithRuntime3);
 
-    expect(longestTest).toBeCloseTo(913345);
+    expect(longestTest).toBeCloseTo(913_345);
     expect(longestTestName).toBe('1f1.ts');
     expect(suggestedGroupCount).toBe(8);
-    expect(totalRuntime).toBeCloseTo(6486970);
+    expect(totalRuntime).toBeCloseTo(6_486_970);
   });
 
   it('Should provide runtime details about a group of files', () => {

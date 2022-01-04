@@ -1,2 +1,2 @@
-export * from './createSplitConfig';
-export * from './getGroupRuntime';
+export * from './create-split-config';
+export * from './get-group-runtime';

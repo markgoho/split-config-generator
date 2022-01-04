@@ -1,1 +1,1 @@
-export * from './createGroupOverview';
+export * from './create-group-overview';

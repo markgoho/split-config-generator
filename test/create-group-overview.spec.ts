@@ -6,7 +6,7 @@ describe('Group Overview', () => {
     expect(createGroupOverview(fileGroups)).toStrictEqual([
       { groupNumber: 1, numberOfFiles: 26, totalRunTime: 70 },
       { groupNumber: 2, numberOfFiles: 26, totalRunTime: 330 },
-      { groupNumber: 3, numberOfFiles: 26, totalRunTime: 6486970 },
+      { groupNumber: 3, numberOfFiles: 26, totalRunTime: 6_486_970 },
     ]);
   });
 });

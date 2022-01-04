@@ -1,1 +1,1 @@
-export * from './runtimeDetails';
+export * from './runtime-details';

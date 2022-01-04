@@ -1,8 +1,8 @@
 import { FilesWithRuntime } from '../../src';
 
-import { fileWithRuntime1 } from './fileWithRuntime1.mock';
-import { fileWithRuntime2 } from './fileWithRuntime2.mock';
-import { fileWithRuntime3 } from './fileWithRuntime3.mock';
+import { fileWithRuntime1 } from './file-with-runtime-1.mock';
+import { fileWithRuntime2 } from './file-with-runtime-2.mock';
+import { fileWithRuntime3 } from './file-with-runtime-3.mock';
 
 export const filesWithRuntime1: FilesWithRuntime = {
   files: fileWithRuntime1,

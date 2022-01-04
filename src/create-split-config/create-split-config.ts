@@ -16,16 +16,10 @@ export const createSplitConfig = (
   const { longestTest, totalRuntime, suggestedGroupCount } =
     runtimeDetails(files);
 
-  let expectedGroupCount;
-
-  if (
-    manualGroupCount !== undefined &&
-    manualGroupCount <= suggestedGroupCount
-  ) {
-    expectedGroupCount = manualGroupCount;
-  } else {
-    expectedGroupCount = suggestedGroupCount;
-  }
+  const expectedGroupCount =
+    manualGroupCount !== undefined && manualGroupCount <= suggestedGroupCount
+      ? manualGroupCount
+      : suggestedGroupCount;
 
   // console.log({ manualGroupCount, suggestedGroupCount, expectedGroupCount });
 
@@ -39,12 +33,10 @@ export const createSplitConfig = (
   // The total runtime of a group is limited based on either:
   // 1. The longest test if the suggested group count is used
   // 2. The total runtime of all the tests divided by the manual group count
-  let maxGroupRuntime: number;
-  if (manualGroupCount === undefined) {
-    maxGroupRuntime = longestTest;
-  } else {
-    maxGroupRuntime = totalRuntime / expectedGroupCount;
-  }
+  const maxGroupRuntime =
+    manualGroupCount === undefined
+      ? longestTest
+      : totalRuntime / expectedGroupCount;
 
   // console.log({ maxGroupRuntime, longestTest });
 
@@ -53,8 +45,9 @@ export const createSplitConfig = (
   }
 
   // The magic happens here
+  // eslint-disable-next-line unicorn/no-array-for-each
   groupRuntimes.forEach(async (group: FilesWithRuntime) => {
-    while (getGroupRuntime(group.files) < maxGroupRuntime && files.length) {
+    while (getGroupRuntime(group.files) < maxGroupRuntime && files.length > 0) {
       // start with file at front of array
       const largestFile = files[0];
 

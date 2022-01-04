@@ -1,1 +1,1 @@
-export * from './createSplitConfig';
+export * from './create-split-config';

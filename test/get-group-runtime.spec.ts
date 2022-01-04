@@ -11,6 +11,6 @@ describe('Group Runtime', () => {
   });
 
   it('Should calculate the runtime of a group', () => {
-    expect(getGroupRuntime(fileWithRuntime3)).toBe(6486970);
+    expect(getGroupRuntime(fileWithRuntime3)).toBe(6_486_970);
   });
 });
