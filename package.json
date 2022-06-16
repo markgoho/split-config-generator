@@ -26,7 +26,6 @@
   "homepage": "https://github.com/markgoho/split-config-generator#readme",
   "devDependencies": {
     "@sindresorhus/tsconfig": "^3.0.1",
-    "@types/jest": "^27.4.1",
     "@typescript-eslint/eslint-plugin": "^5.18.0",
     "@typescript-eslint/parser": "^5.18.0",
     "eslint": "^8.12.0",
