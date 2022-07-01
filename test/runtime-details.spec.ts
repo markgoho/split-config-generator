@@ -1,3 +1,5 @@
+import { describe, test, expect } from '@jest/globals';
+
 import { runtimeDetails } from '../src/runtime-details';
 import {
   fileWithRuntime1,
@@ -7,7 +9,7 @@ import {
 } from './mocks';
 
 describe('Runtime Details', () => {
-  it('Should provide runtime details about a group of files', () => {
+  test('Should provide runtime details about a group of files', () => {
     const { longestTest, longestTestName, suggestedGroupCount, totalRuntime } =
       runtimeDetails(fileWithRuntime1);
 
@@ -17,7 +19,7 @@ describe('Runtime Details', () => {
     expect(totalRuntime).toBeCloseTo(70);
   });
 
-  it('Should provide runtime details about a group of files', () => {
+  test('Should provide runtime details about a group of files', () => {
     const { longestTest, longestTestName, suggestedGroupCount, totalRuntime } =
       runtimeDetails(fileWithRuntime2);
 
@@ -27,7 +29,7 @@ describe('Runtime Details', () => {
     expect(totalRuntime).toBeCloseTo(330);
   });
 
-  it('Should provide runtime details about a group of files', () => {
+  test('Should provide runtime details about a group of files', () => {
     const { longestTest, longestTestName, suggestedGroupCount, totalRuntime } =
       runtimeDetails(fileWithRuntime3);
 
@@ -37,7 +39,7 @@ describe('Runtime Details', () => {
     expect(totalRuntime).toBeCloseTo(6_486_970);
   });
 
-  it('Should provide runtime details about a group of files', () => {
+  test('Should provide runtime details about a group of files', () => {
     const { longestTest, longestTestName, suggestedGroupCount, totalRuntime } =
       runtimeDetails(veryContrivedExample);
 
